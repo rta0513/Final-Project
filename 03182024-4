@@ -1,0 +1,172 @@
+# Imports the subprocess package to allow the use of command line tools
+import subprocess
+# Imports the sys package to assist in closing program
+import sys
+# Function that allows user to scan networks
+def nmap_fun():
+    # Requests target to scan
+    nmap_targ = input("Please define the target you wish to scan: ")
+    # Confirms target to scan
+    print("The target you have chosen is: ", nmap_targ)
+    # Requests scan type
+    nmap_type = input("Please choose the type of scan you wish to perform:\n"
+                      "1)TCP Scan\n"
+                      "2)UDP Scan\n"
+                      "3)Comprehensive Scan\n"
+                      "4)Ping\n"
+                      "5)Traceroute\n"
+                      "6)Exit PyMAP\n"
+                      "Enter Here: ")
+    # Series of if statements decided by the user's previous input
+    if nmap_type == "1":
+        # Informs user of chosen scan type and target
+        print("TCP Scan has been chosen against the target: ", nmap_targ)
+        print("Please wait...")
+        # The command being run with chosen option
+        # This runs a TCP scan against the 1000 most common ports by default
+        nmap_com = ["nmap", "-sS", nmap_targ]
+        # The results of command being stored within variable
+        nmap_res = subprocess.run(nmap_com, capture_output=True, text=True)
+        # Prints the results of command in standard output
+        print("Results:\n", nmap_res.stdout)
+        # Creates and writes to text file to store nmap results
+        nmap_res_file = open('C:/Users/radm4/OneDrive/Desktop/tcp.txt', "w")
+        nmap_res_file.write("TCP Scan Results: ")
+        # Appends results to and closes text file
+        nmap_res_file.write(nmap_res.stdout)
+        nmap_res_file.close()
+        # Restarts program
+        nmap_fun()
+    elif nmap_type == "2":
+        # Informs user of chosen scan type and target
+        print("UDP scan has been chosen against the target: ", nmap_targ)
+        print("Please wait...")
+        # The command being run with chosen option
+        # This runs a UDP scan against the 1000 most common ports by default
+        nmap_com = ["nmap", "-sU", nmap_targ]
+        # The results of command being stored within variable
+        nmap_res = subprocess.run(nmap_com, capture_output=True, text=True)
+        # Prints the results of command
+        print("Results:\n", nmap_res.stdout)
+        # Creates and writes to text file to store nmap results
+        nmap_res_file = open('C:/Users/radm4/OneDrive/Desktop/udp.txt', "w")
+        nmap_res_file.write("UDP Scan Results: ")
+        # Appends results to and closes text file
+        nmap_res_file.write(nmap_res.stdout)
+        nmap_res_file.close()
+        # Restarts program
+        nmap_fun()
+    elif nmap_type == "3":
+        # Informs user of chosen scan type and target
+        print("Comprehensive scan has been chosen against the target: ", nmap_targ)
+        print("Please wait...")
+        # The command being run with chosen option
+        # This runs TCP scan, UDP scan, OS detection, version detection
+        nmap_com = ["nmap", "-sS", "-sU", "-A", "-sV", nmap_targ]
+        # The results of command being stored within variable
+        nmap_res = subprocess.run(nmap_com, capture_output=True, text=True)
+        # Prints the results of command
+        print("Results:\n", nmap_res.stdout)
+        # Creates and writes to text file to store nmap results
+        nmap_res_file = open('C:/Users/radm4/OneDrive/Desktop/comp.txt', "w")
+        nmap_res_file.write("Comprehensive Scan Results: ")
+        # Appends results to and closes text file
+        nmap_res_file.write(nmap_res.stdout)
+        nmap_res_file.close()
+        # Restarts program
+        nmap_fun()
+    elif nmap_type == "4":
+        # Informs user of chosen scan type and target
+        print("Ping has been chosen against the target: ", nmap_targ)
+        print("Please wait...")
+        # The command being run with chosen option
+        # This runs a command similar to ping
+        nmap_com = ["nmap", "-PE", nmap_targ]
+        # The results of command being stored within variable
+        nmap_res = subprocess.run(nmap_com, capture_output=True, text=True)
+        # Prints the results of command
+        print("Results:\n", nmap_res.stdout)
+        # Creates and writes to text file to store nmap results
+        nmap_res_file = open('C:/Users/radm4/OneDrive/Desktop/ping.txt', "w")
+        nmap_res_file.write("Ping Results: ")
+        # Appends results to and closes text file
+        nmap_res_file.write(nmap_res.stdout)
+        nmap_res_file.close()
+        # Restarts program
+        nmap_fun()
+    elif nmap_type == "5":
+        # Informs user of chosen scan type and target
+        print("Traceroute has been chosen against the target: ", nmap_targ)
+        print("Please wait...")
+        # The command being run with chosen option
+        # This runs a command similar to traceroute
+        nmap_com = ["nmap", "--traceroute", nmap_targ]
+        # The results of command being stored within variable
+        nmap_res = subprocess.run(nmap_com, capture_output=True, text=True)
+        # Prints the results of command
+        print("Results:\n", nmap_res.stdout)
+        # Creates and writes to text file to store nmap results
+        nmap_res_file = open('C:/Users/radm4/OneDrive/Desktop/trace.txt', "w")
+        nmap_res_file.write("Traceroute Results: ")
+        # Appends results to and closes text file
+        nmap_res_file.write(nmap_res.stdout)
+        nmap_res_file.close()
+        # Restarts program
+        nmap_fun()
+    elif nmap_type == "6":
+        # Informs user of exit
+        print("Thank you for using PyMAP!")
+        print("Exiting...")
+        # Exits program
+        sys.exit()
+    else:
+        # Occurs when invalid option is chosen
+        print("Invalid Option")
+        print("Restarting...")
+        # Restarts program
+        nmap_fun()
+
+# Welcomes user to the PyMAP tool
+print(r"__/\\\\\\\\\\\\\____/\\\________/\\\__/\\\\____________/\\\\_____/\\\\\\\\\_____/\\\\\\\\\\\\\___")
+print(r" _\/\\\/////////\\\_\///\\\____/\\\/__\/\\\\\\________/\\\\\\___/\\\\\\\\\\\\\__\/\\\/////////\\\_")
+print(r"  _\/\\\_______\/\\\___\///\\\/\\\/____\/\\\//\\\____/\\\//\\\__/\\\/////////\\\_\/\\\_______\/\\\_")
+print(r"   _\/\\\\\\\\\\\\\/______\///\\\/______\/\\\\///\\\/\\\/_\/\\\_\/\\\_______\/\\\_\/\\\\\\\\\\\\\/__")
+print(r"    _\/\\\/////////__________\/\\\_______\/\\\__\///\\\/___\/\\\_\/\\\\\\\\\\\\\\\_\/\\\/////////____")
+print(r"     _\/\\\___________________\/\\\_______\/\\\____\///_____\/\\\_\/\\\/////////\\\_\/\\\_____________")
+print(r"      _\/\\\___________________\/\\\_______\/\\\_____________\/\\\_\/\\\_______\/\\\_\/\\\_____________")
+print(r"       _\/\\\___________________\/\\\_______\/\\\_____________\/\\\_\/\\\_______\/\\\_\/\\\_____________")
+print(r"        _\///____________________\///________\///______________\///__\///________\///__\///______________")
+print("Welcome to a PYMAP, a simple Python Nmap tool!")
+
+# Function that allows user to enumerate local IP addresses if wanted
+def enum_fun():
+    # Asks user to enumerate local IP addresses
+    enum_ip = input("Enumerate local IP addresses? (y/n/exit): ")
+    # If statements decided by user input
+    if enum_ip.lower() == "y" or enum_ip.lower() == "yes":
+        # Defines command to enumerate IP
+        enum_com = ["arp", "-a"]
+        # Stores result within variable
+        enum_res = subprocess.run(enum_com, capture_output=True, text=True)
+        # Prints result in standard output
+        print(enum_res.stdout)
+        # Runs nmap_fun
+        nmap_fun()
+    elif enum_ip.lower() == "n" or enum_ip.lower() == "no":
+        # Runs nmap_fun
+        nmap_fun()
+    elif enum_ip.lower() == "exit" or enum_ip.lower() == "e":
+        # Informs user of exit
+        print("Thank you for using PyMAP!")
+        print("Exiting...")
+        # Exits program
+        sys.exit()
+    else:
+        # Occurs when invalid option is chosen
+        print("Invalid Option!")
+        print("Restarting...")
+        # Restarts program
+        enum_fun()
+
+# Runs enum_fun
+enum_fun()
