@@ -1,5 +1,4 @@
 # Imports modules needed to run script
-# Comment
 import random
 import sys
 import subprocess
@@ -341,7 +340,7 @@ def port_scan():
             print("Please wait...")
             # The command being run with chosen option
             # This runs a Traceroute scan against the target
-            com = ["tracert", scan_targ]
+            com = ["nmap", "-sn", "--traceroute", scan_targ]
             # Stores result within variable
             com_res = subprocess.run(com, capture_output=True, text=True)
             # Prints result in standard output
@@ -365,7 +364,7 @@ def port_scan():
             print("Please wait...")
             # The command being run with chosen option
             # This runs a Traceroute scan against the target
-            com = ["tracert", scan_targ]
+            com = ["nmap", "-sn", "--traceroute", scan_targ]
             # Stores result within variable
             com_res = subprocess.run(com, capture_output=True, text=True)
             # Prints result in standard output
