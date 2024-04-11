@@ -1,4 +1,5 @@
 # Imports modules needed to run script
+
 # Used to choose random ASCII artwork
 import random
 # Used to exit program
